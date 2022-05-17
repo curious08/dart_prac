@@ -128,6 +128,183 @@ void main(List<String> args) {
   --counter;
   print("counter at $counter");
 
-  
+  ///Types & Operations
 
+  //this is a comment (single line comment)
+  /* this is also a commnet
+  over many 
+  many lines....
+   */
+  /// I am a documentation comment
+
+  //data type in dart
+  //int
+  //double
+  //num
+  //dynamic
+  //String
+  /// you can create your own custome types too
+  /// root of all types is Object type
+  /// every other type in dart is subtype of object, and as a subtype shares object's basic functionality
+  ///
+  const myInteger = 10;
+  //in the absence of type dart figers out the correct type of each constant above
+  const myDouble = 10.5;
+
+  //checking type at runtime
+  num myNum = 10.5;
+  print(myNum is double); //true
+  print(myNum is int); //false
+//recall both int and double are subtype of num
+//another way to use runtimeType
+  print(myNum.runtimeType); //double
+
+  ///type conversion
+  ///var integer = 100;
+  ///var decimal = 12.5;
+  ///integer = decimal;
+  ///A value of type 'double' can't be assigned to a variable of type 'int'.
+  ///
+  ///no implicit conversion
+  ///integer = decimal.toInt();
+  ///
+  print(myNum.toInt()); //doubel to int explicitly
+
+  const hourlyRate = 19.5;
+  const hoursWorked = 10;
+  const totalCost = hourlyRate * hoursWorked;
+  //what is the type of totalCost? int * double => double (because double is safest choice here )
+  print(totalCost.runtimeType);
+  //if you want int
+  print(totalCost.toInt());
+  //where to use const where to use final?? see the error
+
+  //const anotherCost = (hourlyRate * hoursWorked).toInt();
+
+  //in the above code it is applying toInt() in run time so final is required
+  /*
+  The parentheses tell Dart to do the multiplication first, and after that, to take the result and convert 
+  it to an integer value. However, the compiler complains about this: Const variables must be initialized 
+  with a const ant value.
+  The problem is that toInt is a runtime method. This means that totalCost can’t be determined 
+  at compile time, so making it const isn’t valid. No problem; there’s an easy fix.
+  Just change const to final:
+  */
+  const double wantDouble = 3;
+  print(wantDouble); //3.0
+
+  ///Casting down
+  num someEvenNum = 3;
+  final someInt = someEvenNum as int;
+  print("3.isEven => ${someInt.isEven}");
+
+  const age1 = 42;
+  const age2 = 21;
+  const averageAge = (age1 + age2) / 2;
+
+  //String
+  var salutation = "Heello.... ";
+  print(salutation.codeUnits);
+
+  print("I love Pizza");
+  print('I love Pizza');
+  print("Pizza Lover's");
+  print('Pizza Lover\s');
+
+  //concatenation
+  var msg = "Hello " + "Sumesh ";
+  const greeting = "how's you...";
+  msg += greeting;
+  print(msg);
+
+  // to do a lot of concatenation better use stringbuffer
+  final message = StringBuffer();
+  message.write("Hello ");
+  message.write("From String ");
+  message.write("Buffer... ");
+  print(message.toString());
+
+  //string interpolation
+  const nameX = "Sumesh";
+  const msgX = "Hello $nameX how's you hope you got my msg";
+  print(msgX);
+
+  const oneThird = 1 / 3;
+  const sentence = "One third is $oneThird .";
+  print(sentence); // One third is 0.333333333333333
+  //how to fix with fixed decimal
+  final newSentence =
+      "One third is ${oneThird.toStringAsFixed(3)}"; //why final ? becaue toStringAsFixed works runtime
+  print(newSentence); // One third is 0.3333
+
+  //multi line strings
+  const bigString = '''hello this is a
+    big string
+    it will be a
+    long string that contains
+    several lines
+  ''';
+  print(bigString); //''' or """ both are same
+  /*
+  don’t want the output string to contain newline characters, then you can
+  surround each line with single-quotes:
+   */
+  const oneLine = 'this is a single line'
+      ' only'
+      ' thats it.';
+  print(oneLine);
+
+  const twoLines = 'This is a new\nline please see it.';
+  print(twoLines);
+  /*
+  sometimes you want to ignore any special characters that a string might contain. 
+  To do that, you can create a raw string by putting r in front of the string literal
+   */
+  const rawString = r'my name is \n is $name';
+  print(rawString);
+
+  //inserting charcter from there codes
+  print(
+      'I \u2764 Dart\u0021'); //using unicode \u followed by 4digit hexadecimal code
+  //for code points values higher than hexadecimla FFFF
+  print("I Love \u{1F3AF}");
+
+  ///Objects and dynamic types
+  /*
+  Dart grew out of the desire to solve some problems inherent in JavaScript. JavaScript is a dynamically-typed language.
+  Dynamic means that something can change, and for JavaScript that means the types can change at runtime.
+   */
+  var myVariable = 42;
+  //myVariable = "Hello";//comiple time error valid in js not in dart
+
+  ///the creator of dart inculded dynamic type who wants to write code in dynamic way
+  dynamic myDynamicVar = 1989;
+  print(myDynamicVar.runtimeType);
+  myDynamicVar = "Hello Sumesh";
+  print(myDynamicVar.runtimeType);
+
+  /*
+  While dynamic is built into the system, it’s more of a concession rather than an encouragement to use it. You
+  should still embrace static typing in your code as it will prevent you from making silly mistakes.
+  If you need to explicitly say that any type is allowed, you should consider using the Object? type.
+  */
+  Object myObjVar = 42;
+  print(myObjVar.runtimeType);
+  myObjVar = "Sumesh";
+  print(myObjVar.runtimeType);
+
+  /*
+  At runtime, Object? and dynamic behave nearly the same.
+  However, when you explicitly declare a variable as Object?,
+  you’re telling everyone that you generalized your variable on
+  purpose, and that they’ll need to check its type at runtime if
+  they want to do anything specific with it. Using dynamic, on
+  the other hand, is more like saying you don’t know what the
+  type is; you’re telling people they can do what they like with
+  this variable, but it’s completely on them if their code
+  crashes.
+  */
+
+  ///Control Flow begins
+  ///page 106
 }
